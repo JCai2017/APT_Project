@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="ee382apt.thread.MainHUBActivity">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="43dp"
+        android:text="Welcome to Thread"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/cTimeline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create TimeLine"
+        app:layout_constraintRight_toLeftOf="@+id/AddEvent"
+        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
+        android:onClick="ee382apt.thread.MainHUBActivity.onClick"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.323"
+        android:layout_marginTop="43dp"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <Button
+        android:id="@+id/AddEvent"
+        android:layout_width="125dp"
+        android:layout_height="48dp"
+        android:text="Add Event"
+        android:layout_marginRight="47dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="43dp"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <Button
+        android:id="@+id/ViewTimeLine"
+        android:layout_width="140dp"
+        android:layout_height="51dp"
+        android:layout_marginLeft="31dp"
+        android:layout_marginTop="61dp"
+        android:text="TimeLine View"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cTimeline"
+        tools:layout_editor_absoluteY="228dp" />
+
+    <Button
+        android:id="@+id/ViewCalendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="61dp"
+        android:text="Calendar View"
+        app:layout_constraintTop_toBottomOf="@+id/AddEvent"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toRightOf="@+id/ViewTimeLine"
+        android:layout_marginLeft="8dp" />
+
+    <Button
+        android:id="@+id/DeleteTimeline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="51dp"
+        android:layout_marginTop="68dp"
+        android:text="Delete TimeLine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.814"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/DeleteEvent"
+        app:layout_constraintTop_toBottomOf="@+id/ViewTimeLine"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/DeleteEvent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Event"
+        android:layout_marginTop="74dp"
+        app:layout_constraintTop_toBottomOf="@+id/ViewCalendar"
+        android:layout_marginRight="37dp"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintVertical_bias="0.0" />
+</android.support.constraint.ConstraintLayout>

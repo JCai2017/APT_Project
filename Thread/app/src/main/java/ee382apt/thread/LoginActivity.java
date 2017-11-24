@@ -65,7 +65,15 @@ public class LoginActivity extends AppCompatActivity implements
             GoogleSignInAccount acct = result.getSignInAccount();
             //Switch to View Streams
             email = acct.getEmail();
+
+            gotoAgree();
         }
+    }
+
+    public void gotoAgree(){
+        Intent intent = new Intent(this, AgreementActivity.class);
+        intent.putExtra("email", email);
+        startActivity(intent);
     }
 
     private void signIn(){
