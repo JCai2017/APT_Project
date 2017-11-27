@@ -54,6 +54,9 @@ public class EditEventActivity extends AppCompatActivity implements
             Spinner tl = (Spinner)findViewById(R.id.TimeLine);
             tl.setSelection(pos);
         }
+
+        findViewById(R.id.SubmitButton).setOnClickListener(this);
+        findViewById(R.id.CancelButton).setOnClickListener(this);
     }
 
     public void onClick(View view){
@@ -74,7 +77,7 @@ public class EditEventActivity extends AppCompatActivity implements
                 //TODO: Add data to Database
                 break;
 
-            case R.id.backButton:
+            case R.id.CancelButton:
                 finish();
                 break;
         }

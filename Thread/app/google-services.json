@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "640259352036",
-    "project_id": "thread-185819"
+    "project_number": "1072026566435",
+    "project_id": "thread-187322"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:640259352036:android:6a641c23c5d715a2",
+        "mobilesdk_app_id": "1:1072026566435:android:6a641c23c5d715a2",
         "android_client_info": {
           "package_name": "ee382apt.thread"
         }
       },
       "oauth_client": [
         {
-          "client_id": "640259352036-c06o9a8k3nout7chp2nvlq6ukfre6mds.apps.googleusercontent.com",
-          "client_type": 3
-        },
-        {
-          "client_id": "640259352036-o2c2ffjddumbghe7u7ma3grrj4gicli0.apps.googleusercontent.com",
+          "client_id": "1072026566435-cq1sh4dnstc8chp410adq6u62io9uv4b.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "ee382apt.thread",
-            "certificate_hash": "929e185b5e1753f102309fb0e49d312204ea19c1"
+            "certificate_hash": "88e8ae84ba589a811cbee923fad06f1f8e54d513"
           }
+        },
+        {
+          "client_id": "1072026566435-t20v8l4s20gmiojs5t48qgo20dsfb807.apps.googleusercontent.com",
+          "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBzb_-NnP3jjscQwyKVQ1h-eqrZzUCPxZ4"
+          "current_key": "AIzaSyBaxXSAmLZo9aAsCjzApJF7RjtCZjB7QDc"
         }
       ],
       "services": {

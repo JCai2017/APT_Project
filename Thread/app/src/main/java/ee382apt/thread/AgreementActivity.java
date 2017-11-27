@@ -15,7 +15,7 @@ public class AgreementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agreement);
 
-        email = getIntent().getExtras().getString("email");
+        //email = getIntent().getExtras().getString("email");
         //TODO: Check for agreement on database
     }
 

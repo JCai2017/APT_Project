@@ -15,6 +15,9 @@ public class CreateTimeLineActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_time_line);
 
+        findViewById(R.id.SubmitButton).setOnClickListener(this);
+        findViewById(R.id.BackButton).setOnClickListener(this);
+
         email = getIntent().getExtras().getString("email");
     }
 
@@ -26,7 +29,7 @@ public class CreateTimeLineActivity extends AppCompatActivity implements
 
                 //TODO: Check if TimeLine exists for user and Add TimeLine to database
                 break;
-            case R.id.backButton:
+            case R.id.BackButton:
                 finish();
                 break;
         }

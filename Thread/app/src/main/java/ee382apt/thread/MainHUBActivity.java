@@ -16,7 +16,7 @@ public class MainHUBActivity extends AppCompatActivity implements
 
         findViewById(R.id.cTimeline).setOnClickListener(this);
         findViewById(R.id.AddEvent).setOnClickListener(this);
-        findViewById(R.id.DeleteEvent).setOnClickListener(this);
+        findViewById(R.id.ViewEvents).setOnClickListener(this);
         findViewById(R.id.DeleteTimeline).setOnClickListener(this);
         findViewById(R.id.ViewTimeLine).setOnClickListener(this);
         findViewById(R.id.ViewCalendar).setOnClickListener(this);
@@ -25,7 +25,7 @@ public class MainHUBActivity extends AppCompatActivity implements
     }
 
     public void onClick(View view){
-        Intent intent = new Intent(this, null);
+        Intent intent = new Intent(this, CreateTimeLineActivity.class);
         switch(view.getId()){
             case R.id.cTimeline:
                 intent = new Intent(this, CreateTimeLineActivity.class);
@@ -40,8 +40,9 @@ public class MainHUBActivity extends AppCompatActivity implements
             case R.id.DeleteTimeline:
                 intent = new Intent(this, DeleteTimelineActivity.class);
                 break;
-            case R.id.DeleteEvent:
-                intent = new Intent(this, ViewEventActivity.class);
+            case R.id.ViewEvents:
+                //TODO: Redirect to ViewEvents
+                //intent = new Intent(this, ViewEventActivity.class);
                 break;
             case R.id.ViewTimeLine:
                 //TODO: Add intent to TimeLine View

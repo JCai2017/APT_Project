@@ -4,9 +4,9 @@ android {
     signingConfigs {
         config {
             keyAlias 'key0'
-            keyPassword 'pass4access'
-            storeFile file('C:/Users/caiju/Documents/ClassDocuments/EE382VAPT/APT_Project/jason_keys.jks')
-            storePassword 'pass4key'
+            keyPassword 'pass4key'
+            storeFile file('C:/Users/caiju/Documents/ClassDocuments/EE382VAPT/APT_Project/keystore.jks')
+            storePassword 'pass4access'
         }
     }
     compileSdkVersion 26
@@ -23,6 +23,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
         }
     }
 }
@@ -32,7 +36,6 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.google.android.gms:play-services-auth:11.0.4'
