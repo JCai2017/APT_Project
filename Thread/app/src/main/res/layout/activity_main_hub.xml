@@ -66,34 +66,26 @@
         android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintLeft_toRightOf="@+id/ViewTimeLine"
-        android:layout_marginLeft="8dp" />
+        android:layout_marginLeft="8dp"
+        app:layout_constraintHorizontal_bias="0.507"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/DeleteTimeline"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/DeleteTimeline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="51dp"
+        android:layout_marginLeft="122dp"
         android:layout_marginTop="68dp"
         android:text="Delete TimeLine"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.814"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/ViewEvents"
         app:layout_constraintTop_toBottomOf="@+id/ViewTimeLine"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <Button
-        android:id="@+id/ViewEvents"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginRight="37dp"
-        android:layout_marginTop="74dp"
-        android:text="View Events"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.038"
+        android:layout_marginRight="8dp"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ViewCalendar"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintHorizontal_bias="0.0" />
+
 </android.support.constraint.ConstraintLayout>
