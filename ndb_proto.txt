@@ -1,0 +1,15 @@
+class Event(ndb.Model):
+    name = ndb.StringProperty(indexed=True)
+    ownerEmail = ndb.StringProperty()
+    date = ndb.StringProperty(indexed=False)
+    month = ndb.StringProperty(indexed=False)
+    year = ndb.StringProperty(indexed=False)
+    time = ndb.StringProperty(indexed=False)
+
+class Notification(ndb.Model):
+    event = ndb.KeyProperty(kind=Event)
+    ownerEmail = ndb.StringProperty()
+    date = ndb.StringProperty(indexed=False)
+    month = ndb.StringProperty(indexed=False)
+    year = ndb.StringProperty(indexed=False)
+    time = ndb.StringProperty(indexed=False)
