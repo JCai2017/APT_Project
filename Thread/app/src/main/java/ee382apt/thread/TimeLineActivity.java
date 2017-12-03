@@ -7,15 +7,15 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.github.vipulasri.timelineview.sample.*;
+import com.github.vipulasri.timelineview.sample.model.OrderStatus;
 import com.github.vipulasri.timelineview.sample.model.Orientation;
 import com.github.vipulasri.timelineview.sample.model.TimeLineModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewTimeLine extends AppCompatActivity {
-
-
+public class TimeLineActivity extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private TimeLineAdapter mTimeLineAdapter;
     private List<TimeLineModel> mDataList = new ArrayList<>();
@@ -33,7 +33,7 @@ public class ViewTimeLine extends AppCompatActivity {
         if(getSupportActionBar()!=null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //mOrientation = (Orientation) getIntent().getSerializableExtra(PrepareTimeLineActivity.EXTRA_ORIENTATION);
+        //mOrientation = (Orientation) getIntent().getSerializableExtra(MainActivity.EXTRA_ORIENTATION);
         //mWithLinePadding = getIntent().getBooleanExtra(MainActivity.EXTRA_WITH_LINE_PADDING, false);
 
         setTitle(mOrientation == Orientation.HORIZONTAL ? getResources().getString(R.string.horizontal_timeline) : getResources().getString(R.string.vertical_timeline));
@@ -60,7 +60,6 @@ public class ViewTimeLine extends AppCompatActivity {
     }
 
     private void setDataListItems(){
-        //TODO: Get Events from database
         /*mDataList.add(new TimeLineModel("Item successfully delivered", "", OrderStatus.INACTIVE));
         mDataList.add(new TimeLineModel("Courier is out to delivery your order", "2017-02-12 08:00", OrderStatus.ACTIVE));
         mDataList.add(new TimeLineModel("Item has reached courier facility at New Delhi", "2017-02-11 21:00", OrderStatus.COMPLETED));
@@ -94,7 +93,7 @@ public class ViewTimeLine extends AppCompatActivity {
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-            //if (savedInstanceState.containsKey(MainActivity.EXTRA_ORIENTATION)) {
+           // if (savedInstanceState.containsKey(MainActivity.EXTRA_ORIENTATION)) {
                 //mOrientation = (Orientation) savedInstanceState.getSerializable(MainActivity.EXTRA_ORIENTATION);
             //}
         }

@@ -24,7 +24,9 @@
         <activity android:name=".DeleteTimelineActivity" />
         <activity android:name=".ViewEventActivity" />
         <activity android:name=".EditEventActivity" />
-        <activity android:name=".ViewTimeLine"></activity>
+        <activity android:name=".ViewTimeLine" />
+        <activity android:name=".PrepareTimeLineActivity" />
+        <activity android:name=".TimeLineActivity"></activity>
     </application>
 
 </manifest>
