@@ -60,12 +60,12 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
     private void handleSignInResult(GoogleSignInResult result){
-        Log.d(TAG, "handleSignInResult" + result.isSuccess());
+        Log.d(TAG, "handleSignInResult: " + result.isSuccess());
         if(result.isSuccess()){
             GoogleSignInAccount acct = result.getSignInAccount();
             //Switch to View Streams
             email = acct.getEmail();
-
+            Log.i("SignInActivity", email);
             gotoAgree();
         }
     }

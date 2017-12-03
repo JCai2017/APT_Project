@@ -20,7 +20,7 @@ public class MainHUBActivity extends AppCompatActivity implements
         findViewById(R.id.ViewTimeLine).setOnClickListener(this);
         findViewById(R.id.ViewCalendar).setOnClickListener(this);
 
-        email = getIntent().getExtras().getString("email");
+        email = getIntent().getStringExtra("email");
     }
 
     public void onClick(View view){
@@ -48,7 +48,6 @@ public class MainHUBActivity extends AppCompatActivity implements
                 //intent = new Intent(this, );
                 break;
         }
-
         intent.putExtra("email", email);
         startActivity(intent);
     }
