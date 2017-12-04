@@ -1,0 +1,26 @@
+[
+    {
+        "outputFile": "/Users/shidashen/Downloads/Timeline-View-master/timelineview/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values/values.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 6,
+                    "startColumn": 4,
+                    "startOffset": 541,
+                    "endColumn": 50,
+                    "endOffset": 587
+                },
+                "from": {
+                    "file": "/Users/shidashen/Downloads/Timeline-View-master/timelineview/build/intermediates/bundles/debug/res/values/values.xml",
+                    "position": {
+                        "startLine": 6,
+                        "startColumn": 4,
+                        "startOffset": 541,
+                        "endColumn": 50,
+                        "endOffset": 587
+                    }
+                }
+            }
+        ]
+    }
+]

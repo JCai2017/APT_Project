@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="timeline_style"><attr format="color|reference" name="marker"/><attr format="color|reference" name="line"/><attr format="dimension" name="markerSize"/><attr format="dimension" name="lineSize"/><attr format="enum" name="lineOrientation">
+            <enum name="horizontal" value="0"/>
+            <enum name="vertical" value="1"/>
+        </attr><attr format="dimension" name="linePadding"/><attr format="boolean" name="markerInCenter"/></declare-styleable>
+    <string name="app_name">TimeLine View</string>
+</resources>
