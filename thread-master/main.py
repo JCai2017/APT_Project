@@ -66,6 +66,8 @@ class SetEvent(webapp2.RequestHandler):
 		for tl in tls:
 			if tl.name == timeLine:
 				tlKey = tl.key.urlsafe()
+				break
+
 		event.timeLine = ndb.Key(urlsafe=tlKey)
 		event.location = location
 		event.put()
@@ -92,7 +94,29 @@ class CreateTimeLine(webapp2.RequestHandler):
 			tl.put()
 			self.response.write("TimeLine created!")
 
+class DeleteTimeLine(webapp2.RequestHandler):
+	def post(self):
+		user = self.request.get('email')
+		timeline = self.request.get('timeLine')
+		tls = TimeLine.query(user == TimeLine.ownerEmail)
+		target = ""
+		# delete timeline
+		for t in tls:
+			if timeline == t.name:
+				target = t
+				t.key.delete()
+				break
+
+		# delete events
+		events = Event.query(target.key == Event.timeLine)
+		for e in events:
+			e.key.delete()
+
+		self.response.headers['Content-Type'] = 'text/plain'
+		self.response.write('Delete success')
+
 app = webapp2.WSGIApplication([
 	('/setevent', SetEvent),
 	('/timeline', CreateTimeLine),
+	('/deletetl', DeleteTimeLine),
 ], debug=True)
