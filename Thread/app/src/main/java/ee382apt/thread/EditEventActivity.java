@@ -106,9 +106,23 @@ public class EditEventActivity extends AppCompatActivity implements
                 EditText et = (EditText)findViewById(R.id.EventEntry);
                 title = et.getText().toString();
 
+                // get date
                 DatePicker datePicker = (DatePicker)findViewById(R.id.TimePicker);
-                time = "" + datePicker.getYear() + datePicker.getMonth() + datePicker.getDayOfMonth();
-                
+                String month = "";
+                int m = datePicker.getMonth() + 1;
+                if (m < 10)
+                    month = "0" + Integer.toString(m);
+                else
+                    month = Integer.toString(m);
+                String day = "";
+                int d = datePicker.getDayOfMonth();
+                if (d < 10)
+                    day = "0" + Integer.toString(d);
+                else
+                    day = Integer.toString(d);
+                time = "" + datePicker.getYear() + month + day;
+                // end get date
+
                 Spinner tl = (Spinner)findViewById(R.id.TimeLine);
                 timeLine = tl.getSelectedItem().toString();
 
