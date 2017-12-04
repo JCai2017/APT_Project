@@ -26,7 +26,8 @@
         <activity android:name=".EditEventActivity" />
         <activity android:name=".ViewTimeLine" />
         <activity android:name=".PrepareTimeLineActivity" />
-        <activity android:name=".TimeLineActivity"></activity>
+        <activity android:name=".TimeLineActivity" />
+        <activity android:name=".ListEventActivity"></activity>
     </application>
 
 </manifest>
