@@ -9,12 +9,12 @@ import android.widget.Toast;
 
 public class PrepareTimeLineActivity extends AppCompatActivity {
 
-    Button[] btnWord = new Button[num];
+    Button[] btnWord = new Button[5];
     LinearLayout linear;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.PrepareTimeLineActivity);
+        setContentView(R.layout.activity_prepare_time_line);
         test();
     }
     private void test() {
@@ -25,6 +25,7 @@ public class PrepareTimeLineActivity extends AppCompatActivity {
             btnWord[i].setWidth(50);
             btnWord[i].setTag(i);
             btnWord[i].setOnClickListener(btnClicked);
+            btnWord[i].setText("some text");
             linear.addView(btnWord[i]);
         }
     }
