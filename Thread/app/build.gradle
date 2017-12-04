@@ -5,8 +5,8 @@ android {
         config {
             keyAlias 'key0'
             keyPassword 'pass4key'
-            storeFile file('/Users/shidashen/Desktop/ADT_EE382V/APT_Project/keystore.jks')
-            //storeFile file('C:/Users/caiju/Documents/ClassDocuments/EE382VAPT/APT_Project/keystore.jks')
+            //storeFile file('/Users/shidashen/Desktop/ADT_EE382V/APT_Project/keystore.jks')
+            storeFile file('C:/Users/caiju/Documents/ClassDocuments/EE382VAPT/APT_Project/keystore.jks')
             //storeFile file('D:/AndroidStudioProject/Thread/keystore.jks')
             storePassword 'pass4access'
         }

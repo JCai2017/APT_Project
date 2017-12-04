@@ -6,35 +6,41 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 
-import com.github.vipulasri.timelineview.sample.*;
-import com.github.vipulasri.timelineview.sample.model.OrderStatus;
 import com.github.vipulasri.timelineview.sample.model.Orientation;
 import com.github.vipulasri.timelineview.sample.model.TimeLineModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TimeLineActivity extends AppCompatActivity {
+public class TimeLineActivity extends AppCompatActivity implements
+        View.OnClickListener{
     private RecyclerView mRecyclerView;
     private TimeLineAdapter mTimeLineAdapter;
     private List<TimeLineModel> mDataList = new ArrayList<>();
     private Orientation mOrientation;
     private boolean mWithLinePadding;
 
+    private static String email = null;
+    private static String timeline = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_timeline);
+        setContentView(R.layout.activity_time_line);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        email = getIntent().getExtras().getString("email");
+        timeline = getIntent().getExtras().getString("timeline");
+
         if(getSupportActionBar()!=null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //mOrientation = (Orientation) getIntent().getSerializableExtra(MainActivity.EXTRA_ORIENTATION);
-        //mWithLinePadding = getIntent().getBooleanExtra(MainActivity.EXTRA_WITH_LINE_PADDING, false);
+        mOrientation = (Orientation) getIntent().getSerializableExtra(PrepareTimeLineActivity.EXTRA_ORIENTATION);
+        mWithLinePadding = getIntent().getBooleanExtra(PrepareTimeLineActivity.EXTRA_WITH_LINE_PADDING, false);
 
         setTitle(mOrientation == Orientation.HORIZONTAL ? getResources().getString(R.string.horizontal_timeline) : getResources().getString(R.string.vertical_timeline));
 
@@ -60,6 +66,7 @@ public class TimeLineActivity extends AppCompatActivity {
     }
 
     private void setDataListItems(){
+        //TODO: Get Events from Database
         /*mDataList.add(new TimeLineModel("Item successfully delivered", "", OrderStatus.INACTIVE));
         mDataList.add(new TimeLineModel("Courier is out to delivery your order", "2017-02-12 08:00", OrderStatus.ACTIVE));
         mDataList.add(new TimeLineModel("Item has reached courier facility at New Delhi", "2017-02-11 21:00", OrderStatus.COMPLETED));
@@ -86,17 +93,25 @@ public class TimeLineActivity extends AppCompatActivity {
     @Override
     protected void onSaveInstanceState(Bundle savedInstanceState) {
         if(mOrientation!=null)
-            //savedInstanceState.putSerializable(MainActivity.EXTRA_ORIENTATION, mOrientation);
+            savedInstanceState.putSerializable(PrepareTimeLineActivity.EXTRA_ORIENTATION, mOrientation);
         super.onSaveInstanceState(savedInstanceState);
     }
 
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         if (savedInstanceState != null) {
-           // if (savedInstanceState.containsKey(MainActivity.EXTRA_ORIENTATION)) {
-                //mOrientation = (Orientation) savedInstanceState.getSerializable(MainActivity.EXTRA_ORIENTATION);
-            //}
+            if (savedInstanceState.containsKey(PrepareTimeLineActivity.EXTRA_ORIENTATION)) {
+                mOrientation = (Orientation) savedInstanceState.getSerializable(PrepareTimeLineActivity.EXTRA_ORIENTATION);
+            }
         }
         super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.backButton:
+                finish();
+                break;
+        }
     }
 }
