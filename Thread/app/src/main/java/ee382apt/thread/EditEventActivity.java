@@ -43,10 +43,10 @@ public class EditEventActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_edit_event);
 
         email= getIntent().getStringExtra("email");
-        title = getIntent().getExtras().getString("title");
-        time = getIntent().getExtras().getString("time");
-        location = getIntent().getExtras().getString("location");
-        timeLine = getIntent().getExtras().getString("timeline");
+        title = getIntent().getStringExtra("title");
+        time = getIntent().getStringExtra("time");
+        location = getIntent().getStringExtra("location");
+        timeLine = getIntent().getStringExtra("timeline");
 
         if(!title.equals("") && title != null){
             EditText eventEntry = (EditText) findViewById(R.id.EventEntry);

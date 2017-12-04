@@ -24,7 +24,7 @@ public class ViewEventActivity extends AppCompatActivity implements
         findViewById(R.id.EditButton).setOnClickListener(this);
         findViewById(R.id.DeleteButton).setOnClickListener(this);
         findViewById(R.id.backButton).setOnClickListener(this);
-        email = getIntent().getExtras().getString("email");
+        email = getIntent().getStringExtra("email");
 
         //TODO: Get Values for Event from Database
         TextView event = (TextView)findViewById(R.id.EventName);

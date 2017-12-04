@@ -30,7 +30,8 @@ public class PrepareTimeLineActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_prepare_time_line);
 
         findViewById(R.id.backButton).setOnClickListener(this);
-        email = getIntent().getExtras().getString("email");
+        findViewById(R.id.switchView).setOnClickListener(this);
+        email = getIntent().getStringExtra("email");
 
         //TODO: populate ArrayList with timelines from database
 
@@ -64,6 +65,9 @@ public class PrepareTimeLineActivity extends AppCompatActivity implements
 
     public void onClick(View view){
         switch(view.getId()){
+            case R.id.switchView:
+                Intent intent = new Intent(this, CalendarActivity.class);
+                intent.putExtra("email", email);
             case R.id.backButton:
                 finish();
                 break;

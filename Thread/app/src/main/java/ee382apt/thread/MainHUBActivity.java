@@ -43,8 +43,7 @@ public class MainHUBActivity extends AppCompatActivity implements
                 intent = new Intent(this, PrepareTimeLineActivity.class);
                 break;
             case R.id.ViewCalendar:
-                //TODO: Add intent to Calendar View
-                //intent = new Intent(this, );
+                intent = new Intent(this, CalendarActivity.class);
                 break;
         }
         intent.putExtra("email", email);

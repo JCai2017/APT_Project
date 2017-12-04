@@ -33,8 +33,8 @@ public class TimeLineActivity extends AppCompatActivity implements
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        email = getIntent().getExtras().getString("email");
-        timeline = getIntent().getExtras().getString("timeline");
+        email = getIntent().getStringExtra("email");
+        timeline = getIntent().getStringExtra("timeline");
 
         if(getSupportActionBar()!=null)
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

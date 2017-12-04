@@ -24,8 +24,8 @@ public class ListEventActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_event);
-        email = getIntent().getExtras().getString("email");
-        time = getIntent().getExtras().getString("time");
+        email = getIntent().getStringExtra("email");
+        time = getIntent().getStringExtra("time");
         titles = new ArrayList<String>();
         locations = new ArrayList<String>();
         titles.clear();
