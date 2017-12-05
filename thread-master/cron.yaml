@@ -1,5 +1,0 @@
-cron:
-- description: send notifications
-  url: /sendsms
-  schedule: every 5 minutes
-  
