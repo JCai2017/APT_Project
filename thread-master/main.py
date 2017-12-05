@@ -26,6 +26,10 @@ class Event(ndb.Model):
 	timeLine = ndb.KeyProperty(kind=TimeLine)
 	location = ndb.StringProperty()
 
+class Agreement(ndb.Model):
+	ownerEmail = ndb.StringProperty()
+	time = ndb.DateTimeProperty(auto_now_add=True)
+
 class ReminderList(ndb.Model):
 	number = ndb.StringProperty()
 	event = ndb.KeyProperty(kind=Event)
@@ -137,6 +141,17 @@ class DeleteTimeLine(webapp2.RequestHandler):
 		self.response.headers['Content-Type'] = 'text/plain'
 		self.response.write('Delete success')
 
+class SendSMS(webapp2.RequestHandler):
+	def get(self):
+		fm = "+17372104776"
+		account_sid = "ACa7bca78c2961d1021f25ccf875b60301"
+		auth_token = "4f2463ca8a235437727db6430c45a42d"
+		client = Client(account_sid, auth_token)
+		body = "You got an event: APT demo on 20171206."
+
+		rv = client.messages.create(to="+15128031589", from_=fm, body=body)
+		self.response.write(str(rv))
+
 class GetEvent(webapp2.RequestHandler):
 	def get(self):
 		user = self.request.get('email')
@@ -200,12 +215,39 @@ class ViewEvent(webapp2.RequestHandler):
 		}
 		self.response.write(json.dumps(template))
 
+class AgreementHandler(webapp2.RequestHandler):
+	def get(self):
+		user = self.request.get('owner')
+		result = Agreement.query(user == Agreement.ownerEmail)
+		l = 0
+		for r in result:
+			l += 1
+
+		if l > 0:
+			result = "AGREE"
+		else:
+			result = "DISAGREE"
+
+		template = {
+			'result': result
+		}
+		self.response.write(json.dumps(template))
+
+	def post(self):
+		user = self.request.get('email')
+		agree = Agreement()
+		agree.ownerEmail = user
+		agree.put()
+		self.response.write('Agree Created!')
+
 app = webapp2.WSGIApplication([
 	('/setevent', SetEvent),
 	('/timeline', CreateTimeLine),
 	('/deletetl', DeleteTimeLine),
+	('/sendsms', SendSMS),
 	('/getevent', GetEvent),
 	('/geteventbytl', GetEventByTimeLine),
 	('/viewevent', ViewEvent),
 	('/deleteevent', DeleteEvent),
+	('/agree', AgreementHandler),
 ], debug=True)
