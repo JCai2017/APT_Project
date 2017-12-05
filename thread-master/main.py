@@ -64,21 +64,42 @@ class SetEvent(webapp2.RequestHandler):
 		time = self.request.get('time')
 		timeLine = self.request.get('timeLine')
 		location = self.request.get('location')
-		
-		event = Event()
-		event.ownerEmail = user
-		event.title = title
-		event.time = time
+		ptitle = self.request.get('ptitle')
+		ptime = self.request.get('ptime')
+		ptimeLine = self.request.get('ptimeLine')
+		plocation = self.request.get('plocation')
 
+		if title != "":
+			tlKey = ""
+			tls = TimeLine.query(TimeLine.ownerEmail == user)
+			for tl in tls:
+				if tl.name == timeLine:
+					tlKey = tl.key
+					break
+		
+			find = ""
+			events = Event.query(user == Event.ownerEmail)
+			for e in events:
+				if title == e.title and time == e.time and location == e.location and tlKey == e.timeLine:
+					find = e
+					break
+
+			if find != "":
+				find.key.delete()
+			
 		tlKey = ""
 		tls = TimeLine.query(TimeLine.ownerEmail == user)
 		for tl in tls:
-			if tl.name == timeLine:
-				tlKey = tl.key.urlsafe()
+			if tl.name == ptimeLine:
+				tlKey = tl.key
 				break
-
-		event.timeLine = ndb.Key(urlsafe=tlKey)
-		event.location = location
+		
+		event = Event()
+		event.ownerEmail = user
+		event.title = ptitle
+		event.time = ptime
+		event.timeLine = ndb.Key(urlsafe=tlKey.urlsafe())
+		event.location = plocation
 		event.put()
 		self.response.write("Event created!")
 
@@ -89,10 +110,16 @@ class DeleteEvent(webapp2.RequestHandler):
 		time = self.request.get('time')
 		location = self.request.get('location')
 		timeLine_name = self.request.get('timeLine')
+		tlKey = ""
+		tls = TimeLine.query(TimeLine.ownerEmail == user)
+		for tl in tls:
+			if tl.name == timeLine_name:
+				tlKey = tl.key
+				break
 
 		events = Event.query(user == Event.ownerEmail)
 		for e in events:
-			if title == e.title and time == e.time and location == e.location:
+			if title == e.title and time == e.time and location == e.location and tlKey == e.timeLine:
 				e.key.delete()
 				break
 
