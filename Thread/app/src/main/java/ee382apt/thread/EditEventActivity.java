@@ -34,6 +34,12 @@ public class EditEventActivity extends AppCompatActivity implements
     String time = null;
     String location = null;
     String timeLine = null;
+
+    String ptitle = null;
+    String ptime = null;
+    String plocation = null;
+    String ptimeLine = null;
+
     ArrayList<String> timeLines = new ArrayList<String>();
     private String API_URL = "https://apt-fall2017.appspot.com/setevent";
 
@@ -48,12 +54,12 @@ public class EditEventActivity extends AppCompatActivity implements
         location = getIntent().getStringExtra("location");
         timeLine = getIntent().getStringExtra("timeLine");
 
-        if(!title.equals("") && title != null){
+        if(title != null && !title.equals("")){
             EditText eventEntry = (EditText) findViewById(R.id.EventEntry);
             eventEntry.setText(title);
         }
 
-        if(!time.equals("") && time != null){
+        if(time != null && !time.equals("")){
             DatePicker datePicker = (DatePicker)findViewById(R.id.TimePicker);
             int year = Integer.parseInt(time.substring(0,4));
             int month = Integer.parseInt(time.substring(4,6))-1;
@@ -63,7 +69,7 @@ public class EditEventActivity extends AppCompatActivity implements
             hour.setText(time.substring(8,10) + ":" + time.substring(10,12));
         }
 
-        if(!location.equals("") && location != null){
+        if(location != null && !location.equals("")){
             EditText locationEntry = (EditText) findViewById(R.id.LocationEntry);
             locationEntry.setText(location);
         }
@@ -83,7 +89,7 @@ public class EditEventActivity extends AppCompatActivity implements
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditEventActivity.this,
                             android.R.layout.simple_spinner_item, timelineName);
                     s.setAdapter(adapter);
-                    if(!timeLine.equals("") && timeLine != null){
+                    if(timeLine != null && !timeLine.equals("")){
                         int pos = timelineName.indexOf(timeLine);
                         Spinner tl = (Spinner)findViewById(R.id.TimeLine);
                         tl.setSelection(pos);
@@ -107,7 +113,7 @@ public class EditEventActivity extends AppCompatActivity implements
         switch (view.getId()){
             case R.id.SubmitButton:
                 EditText et = (EditText)findViewById(R.id.EventEntry);
-                title = et.getText().toString();
+                ptitle = et.getText().toString();
 
                 // get date
                 DatePicker datePicker = (DatePicker)findViewById(R.id.TimePicker);
@@ -127,14 +133,14 @@ public class EditEventActivity extends AppCompatActivity implements
                 EditText hour = (EditText)findViewById(R.id.StartTime);
                 String[] h = hour.getText().toString().split(":");
 
-                time = "" + datePicker.getYear() + month + day + h[0] + h[1];
+                ptime = "" + datePicker.getYear() + month + day + h[0] + h[1];
                 // end get date
 
                 Spinner tl = (Spinner)findViewById(R.id.TimeLine);
-                timeLine = tl.getSelectedItem().toString();
+                ptimeLine = tl.getSelectedItem().toString();
 
                 EditText loc = (EditText)findViewById(R.id.LocationEntry);
-                location = loc.getText().toString();
+                plocation = loc.getText().toString();
 
                 RequestParams params = new RequestParams();
                 params.put("email", email);
@@ -142,6 +148,10 @@ public class EditEventActivity extends AppCompatActivity implements
                 params.put("time", time);
                 params.put("timeLine", timeLine);
                 params.put("location", location);
+                params.put("ptitle", ptitle);
+                params.put("ptime", ptime);
+                params.put("ptimeLine", ptimeLine);
+                params.put("plocation", plocation);
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.post(API_URL, params, new AsyncHttpResponseHandler() {
                     @Override
