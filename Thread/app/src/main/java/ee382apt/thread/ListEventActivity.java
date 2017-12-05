@@ -1,24 +1,35 @@
 package ee382apt.thread;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import cz.msebera.android.httpclient.Header;
+
 public class ListEventActivity extends AppCompatActivity implements
         View.OnClickListener{
-
+    JSONArray titleList = new JSONArray();
+    JSONArray locList = new JSONArray();
     private static ArrayList<String> titles, locations;
     private static String email = null;
     private static String time = null;
     private static ListView mListView;
     private static ListAdapter mListAdapter;
-    //TODO: Replace with API url to get all events for date
-    private String API_URL = "https://apt-fall2017.appspot.com/";
+    private String API_URL = "https://apt-fall2017.appspot.com/getevent";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,21 +42,55 @@ public class ListEventActivity extends AppCompatActivity implements
         titles.clear();
         locations.clear();
 
-        //TODO: Insert code to populate ArrayList with titles and locations of events for a given
-        // time and email
+        AsyncHttpClient httpClient = new AsyncHttpClient();
+        httpClient.get(API_URL+"?email="+email+"&time="+time, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                try {
+                    JSONObject jObject = new JSONObject(new String(responseBody));
+                    titleList = jObject.getJSONArray("titles");
+                    for (int i = 0; i < titleList.length(); i++) {
+                        titles.add(titleList.getString(i));
+                    }
+
+                    locList = jObject.getJSONArray("locations");
+                    for (int i = 0; i < locList.length(); i++) {
+                        locations.add(locList.getString(i));
+                    }
+                    Log.i("ListEvent", "titleList: "+titleList.length() + ", locList: "+locList.length());
+                    int cap = 1;
+                    if(titles.size() > 0){
+                        cap = titles.size();
+                    }
+                    for(int i = 0; i < cap; i ++){
+                        mListAdapter = new ListAdapter(ListEventActivity.this, titles, locations);
+                        mListView.setAdapter(mListAdapter);
+                    }
+                } catch (JSONException j) {
+                    System.out.println("JSON Error");
+                }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("TimeLineRetrieve", "There was a problem in retrieving the url : " + error.toString());
+            }
+        });
 
         findViewById(R.id.backButton).setOnClickListener(this);
         mListView = (ListView)findViewById(R.id.list);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView title = (TextView)view.findViewById(R.id.str_title);
                 Intent it = new Intent(view.getContext(), ViewEventActivity.class);
                 it.putExtra("user_email", email);
+                it.putExtra("title", title.getText().toString());
+                it.putExtra("timewithouthour", time);
                 startActivity(it);
             }
         });
 
-        populateListView();
+        //populateListView();
     }
 
     public void populateListView(){
@@ -54,10 +99,8 @@ public class ListEventActivity extends AppCompatActivity implements
             cap = titles.size();
         }
         for(int i = 0; i < cap; i ++){
-            //TODO: populate ListView with data from API response
             mListAdapter = new ListAdapter(this, titles, locations);
             mListView.setAdapter(mListAdapter);
-
         }
 
     }

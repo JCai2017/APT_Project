@@ -28,8 +28,8 @@ public class CalendarActivity extends AppCompatActivity implements
 
         mDatePicker = (DatePicker)findViewById(R.id.datePicker);
         String month = "";
-        int m = today.get(Calendar.MONTH) + 1;
-        if(m < 10){
+        int m = today.get(Calendar.MONTH);
+        if(m+1 < 10){
             month = "0" + m;
         }else{
             month = Integer.toString(m);
@@ -50,10 +50,11 @@ public class CalendarActivity extends AppCompatActivity implements
             @Override
             public void onDateChanged(DatePicker datePicker, int year, int month, int dayOfMonth) {
                 String m = "";
-                if(month < 10){
-                    m = "0" + month;
+                int t = month + 1;
+                if(t < 10){
+                    m = "0" + t;
                 }else{
-                    m = Integer.toString(month);
+                    m = Integer.toString(t);
                 }
 
                 String day = "";

@@ -10,9 +10,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
-
 import java.util.List;
 
 public class ListAdapter extends BaseAdapter{
@@ -50,7 +47,7 @@ public class ListAdapter extends BaseAdapter{
         }
 
         title.setText(titles.get(position));
-        location.setText(titles.get(position));
+        location.setText(listLocations.get(position));
 
         return v;
     }

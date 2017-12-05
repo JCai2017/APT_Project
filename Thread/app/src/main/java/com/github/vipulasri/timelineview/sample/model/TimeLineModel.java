@@ -3,6 +3,8 @@ package com.github.vipulasri.timelineview.sample.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Date;
+
 /**
  * Created by HP-HP on 05-12-2015.
  */
@@ -12,7 +14,7 @@ public class TimeLineModel implements Parcelable {
     private String mDate;
     private OrderStatus mStatus;
 
-    public TimeLineModel() {
+    public TimeLineModel(String mMessage, Date convertedDate, OrderStatus active) {
     }
 
     public TimeLineModel(String mMessage, String mDate, OrderStatus mStatus) {

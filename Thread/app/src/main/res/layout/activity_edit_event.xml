@@ -32,7 +32,7 @@
 
     <EditText
         android:id="@+id/LocationEntry"
-        android:layout_width="wrap_content"
+        android:layout_width="174dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="7dp"
         android:layout_marginLeft="8dp"
@@ -112,5 +112,19 @@
         android:layout_marginLeft="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="0.153" />
+
+    <EditText
+        android:id="@+id/StartTime"
+        android:layout_width="168dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:hint="12:00"
+        android:inputType="time"
+        app:layout_constraintBottom_toTopOf="@+id/CancelButton"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TimeLine"
+        app:layout_constraintVertical_bias="0.4" />
 
 </android.support.constraint.ConstraintLayout>

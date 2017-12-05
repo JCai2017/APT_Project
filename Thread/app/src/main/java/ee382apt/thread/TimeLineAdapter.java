@@ -6,24 +6,19 @@ package ee382apt.thread;
 
 import android.content.Context;
 import android.support.v4.content.ContextCompat;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import java.util.List;
-
-import com.github.vipulasri.timelineview.TimelineView;
-
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.github.vipulasri.timelineview.TimelineView;
 import com.github.vipulasri.timelineview.sample.model.OrderStatus;
 import com.github.vipulasri.timelineview.sample.model.Orientation;
 import com.github.vipulasri.timelineview.sample.model.TimeLineModel;
 import com.github.vipulasri.timelineview.sample.utils.DateTimeUtils;
 import com.github.vipulasri.timelineview.sample.utils.VectorDrawableUtils;
-import com.github.vipulasri.timelineview.TimelineView;
+
+import java.util.List;
 
 public class TimeLineAdapter extends RecyclerView.Adapter<TimeLineViewHolder> {
 

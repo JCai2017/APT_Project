@@ -39,7 +39,7 @@ public class DeleteTimelineActivity extends AppCompatActivity implements
         findViewById(R.id.backButton).setOnClickListener(this);
 
         email = getIntent().getStringExtra("email");
-        //TODO: Populate Spinner
+
         AsyncHttpClient httpClient = new AsyncHttpClient();
         httpClient.get(API_URL+"/setevent"+"?owner="+email, new AsyncHttpResponseHandler() {
             @Override
@@ -67,7 +67,6 @@ public class DeleteTimelineActivity extends AppCompatActivity implements
     }
 
     public void deleteTimeLine(){
-        //TODO: Delete TimeLine and events from database
         Spinner tl = (Spinner)findViewById(R.id.TimeLines);
         timeLine = tl.getSelectedItem().toString();
 
@@ -98,7 +97,6 @@ public class DeleteTimelineActivity extends AppCompatActivity implements
                 finish();
                 break;
             case R.id.delete:
-                //TODO: Get Entry from Spinner
                 deleteTimeLine();
                 break;
         }

@@ -38,7 +38,6 @@ public class CreateTimeLineActivity extends AppCompatActivity implements
                 EditText tl = (EditText)findViewById(R.id.TimeLine);
                 timeLine = tl.getText().toString();
 
-                //TODO: Check if TimeLine exists for user and Add TimeLine to database
                 RequestParams params = new RequestParams();
                 params.put("email", email);
                 params.put("timeLine", timeLine);
@@ -48,7 +47,7 @@ public class CreateTimeLineActivity extends AppCompatActivity implements
                     @Override
                     public void onSuccess(int statusCode, Header[] headers, byte[] response) {
                         Log.w("async", "success!!!!");
-                        Toast.makeText(CreateTimeLineActivity.this, "Create Successful", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(CreateTimeLineActivity.this, "Create Success!", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(CreateTimeLineActivity.this, MainHUBActivity.class);
                         intent.putExtra("email", email);
                         startActivity(intent);

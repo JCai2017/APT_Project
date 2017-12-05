@@ -46,7 +46,7 @@ public class EditEventActivity extends AppCompatActivity implements
         title = getIntent().getStringExtra("title");
         time = getIntent().getStringExtra("time");
         location = getIntent().getStringExtra("location");
-        timeLine = getIntent().getStringExtra("timeline");
+        timeLine = getIntent().getStringExtra("timeLine");
 
         if(!title.equals("") && title != null){
             EditText eventEntry = (EditText) findViewById(R.id.EventEntry);
@@ -56,9 +56,11 @@ public class EditEventActivity extends AppCompatActivity implements
         if(!time.equals("") && time != null){
             DatePicker datePicker = (DatePicker)findViewById(R.id.TimePicker);
             int year = Integer.parseInt(time.substring(0,4));
-            int month = Integer.parseInt(time.substring(4,6));
-            int day = Integer.parseInt(time.substring(6));
+            int month = Integer.parseInt(time.substring(4,6))-1;
+            int day = Integer.parseInt(time.substring(6,8));
             datePicker.init(year, month, day, null);
+            EditText hour = (EditText) findViewById(R.id.StartTime);
+            hour.setText(time.substring(8,10) + ":" + time.substring(10,12));
         }
 
         if(!location.equals("") && location != null){
@@ -66,11 +68,6 @@ public class EditEventActivity extends AppCompatActivity implements
             locationEntry.setText(location);
         }
 
-        if(!timeLine.equals("") && timeLine != null){
-            int pos = timeLines.indexOf(timeLine);
-            Spinner tl = (Spinner)findViewById(R.id.TimeLine);
-            tl.setSelection(pos);
-        }
         AsyncHttpClient httpClient = new AsyncHttpClient();
         httpClient.get(API_URL+"?owner="+email, new AsyncHttpResponseHandler() {
             @Override
@@ -86,6 +83,11 @@ public class EditEventActivity extends AppCompatActivity implements
                     ArrayAdapter<String> adapter = new ArrayAdapter<String>(EditEventActivity.this,
                             android.R.layout.simple_spinner_item, timelineName);
                     s.setAdapter(adapter);
+                    if(!timeLine.equals("") && timeLine != null){
+                        int pos = timelineName.indexOf(timeLine);
+                        Spinner tl = (Spinner)findViewById(R.id.TimeLine);
+                        tl.setSelection(pos);
+                    }
                 } catch (JSONException j) {
                     System.out.println("JSON Error");
                 }
@@ -96,6 +98,7 @@ public class EditEventActivity extends AppCompatActivity implements
                 Log.e("TimeLineRetrieve", "There was a problem in retrieving the url : " + error.toString());
             }
         });
+
         findViewById(R.id.SubmitButton).setOnClickListener(this);
         findViewById(R.id.CancelButton).setOnClickListener(this);
     }
@@ -120,7 +123,11 @@ public class EditEventActivity extends AppCompatActivity implements
                     day = "0" + Integer.toString(d);
                 else
                     day = Integer.toString(d);
-                time = "" + datePicker.getYear() + month + day;
+
+                EditText hour = (EditText)findViewById(R.id.StartTime);
+                String[] h = hour.getText().toString().split(":");
+
+                time = "" + datePicker.getYear() + month + day + h[0] + h[1];
                 // end get date
 
                 Spinner tl = (Spinner)findViewById(R.id.TimeLine);
@@ -129,7 +136,6 @@ public class EditEventActivity extends AppCompatActivity implements
                 EditText loc = (EditText)findViewById(R.id.LocationEntry);
                 location = loc.getText().toString();
 
-                //TODO: Add data to Database
                 RequestParams params = new RequestParams();
                 params.put("email", email);
                 params.put("title", title);
