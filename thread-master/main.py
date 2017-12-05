@@ -137,17 +137,6 @@ class DeleteTimeLine(webapp2.RequestHandler):
 		self.response.headers['Content-Type'] = 'text/plain'
 		self.response.write('Delete success')
 
-class SendSMS(webapp2.RequestHandler):
-	def get(self):
-		'''fm = "+17372104776"
-		account_sid = "ACa7bca78c2961d1021f25ccf875b60301"
-		auth_token = "4f2463ca8a235437727db6430c45a42d"
-		client = Client(account_sid, auth_token)
-		body = "You got an event: APT demo on 20171206."
-
-		rv = client.messages.create(to="+15128031589", from_=fm, body=body)
-		self.response.write(str(rv))'''
-
 class GetEvent(webapp2.RequestHandler):
 	def get(self):
 		user = self.request.get('email')
@@ -215,7 +204,6 @@ app = webapp2.WSGIApplication([
 	('/setevent', SetEvent),
 	('/timeline', CreateTimeLine),
 	('/deletetl', DeleteTimeLine),
-	('/sendsms', SendSMS),
 	('/getevent', GetEvent),
 	('/geteventbytl', GetEventByTimeLine),
 	('/viewevent', ViewEvent),
