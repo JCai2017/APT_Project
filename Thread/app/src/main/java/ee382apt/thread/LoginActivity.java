@@ -13,6 +13,13 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import cz.msebera.android.httpclient.Header;
 
 
 public class LoginActivity extends AppCompatActivity implements
@@ -23,7 +30,8 @@ public class LoginActivity extends AppCompatActivity implements
     private static String email = null;
     private static final String TAG = "SignInActivity";
     private static final int RC_SIGN_IN = 9001;
-
+    private String API_URL = "https://apt-fall2017.appspot.com/agree";
+    private String result = "DISAGREE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,9 +79,31 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
     public void gotoAgree(){
-        Intent intent = new Intent(this, AgreementActivity.class);
-        intent.putExtra("email", email);
-        startActivity(intent);
+        AsyncHttpClient httpClient = new AsyncHttpClient();
+        httpClient.get(API_URL+"?owner="+email, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                try {
+                    JSONObject jObject = new JSONObject(new String(responseBody));
+                    result = jObject.getString("result");
+                    if (result.compareTo("DISAGREE") == 0) {
+                        Intent intent = new Intent(LoginActivity.this, AgreementActivity.class);
+                        intent.putExtra("email", email);
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(LoginActivity.this, MainHUBActivity.class);
+                        intent.putExtra("email", email);
+                        startActivity(intent);
+                    }
+                } catch (JSONException j) {
+                    System.out.println("JSON Error");
+                }
+            }
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+                Log.e("TimeLineRetrieve", "There was a problem in retrieving the url : " + error.toString());
+            }
+        });
     }
 
     private void signIn(){
