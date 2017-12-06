@@ -1,0 +1,5 @@
+cron:
+- description: check and send notifications
+  url: /check
+  schedule: every 10 minutes
+  

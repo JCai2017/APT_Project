@@ -14,6 +14,8 @@ import webapp2
 import logging
 import re
 import json
+import datetime
+import time
 
 class TimeLine(ndb.Model):
 	name = ndb.StringProperty(indexed=True)
@@ -68,6 +70,7 @@ class SetEvent(webapp2.RequestHandler):
 		ptime = self.request.get('ptime')
 		ptimeLine = self.request.get('ptimeLine')
 		plocation = self.request.get('plocation')
+		number = self.request.get('number')
 
 		if title != "":
 			tlKey = ""
@@ -101,6 +104,14 @@ class SetEvent(webapp2.RequestHandler):
 		event.timeLine = ndb.Key(urlsafe=tlKey.urlsafe())
 		event.location = plocation
 		event.put()
+
+		if number:
+			remind = ReminderList()
+			remind.number = number
+			remind.event = event.key
+			remind.duration = "1"
+			remind.put()
+
 		self.response.write("Event created!")
 
 class DeleteEvent(webapp2.RequestHandler):
@@ -168,16 +179,24 @@ class DeleteTimeLine(webapp2.RequestHandler):
 		self.response.headers['Content-Type'] = 'text/plain'
 		self.response.write('Delete success')
 
-class SendSMS(webapp2.RequestHandler):
-	def get(self):
-		fm = "+17372104776"
-		account_sid = "ACa7bca78c2961d1021f25ccf875b60301"
-		auth_token = "4f2463ca8a235437727db6430c45a42d"
-		client = Client(account_sid, auth_token)
-		body = "You got an event: APT demo on 20171206."
+def SendSMS(number, title, time):
+	fm = "+17372104776"
+	account_sid = "ACa7bca78c2961d1021f25ccf875b60301"
+	auth_token = "4f2463ca8a235437727db6430c45a42d"
+	client = Client(account_sid, auth_token)
+	body = "You got an event: " + title + " on " + time + "."
+	rv = client.messages.create(to=number, from_=fm, body=body)
 
-		rv = client.messages.create(to="+15128031589", from_=fm, body=body)
-		self.response.write(str(rv))
+class CheckList(webapp2.RequestHandler):
+	def get(self):
+		rm_list = ReminderList.query()
+		t_cur = datetime.datetime.now()
+		for elem in rm_list:
+			date_obj = datetime.datetime.strptime(elem.event.get().time, "%Y%m%d%H%M")
+			#SendSMS(elem.number, str(date_obj), "gigi")
+			if datetime.timedelta(hours=0) < date_obj - t_cur + datetime.timedelta(hours=6) < datetime.timedelta(hours=int(elem.duration)):
+				SendSMS(elem.number, elem.event.get().title, date_obj.strftime("%Y-%m-%d %H:%M"))
+				elem.key.delete()
 
 class GetEvent(webapp2.RequestHandler):
 	def get(self):
@@ -242,6 +261,15 @@ class ViewEvent(webapp2.RequestHandler):
 		}
 		self.response.write(json.dumps(template))
 
+class ReminderHandler(webapp2.RequestHandler):
+	def get(self):
+		pass
+
+	def post(self):
+		number = self.request.get('number')
+
+		
+
 class AgreementHandler(webapp2.RequestHandler):
 	def get(self):
 		user = self.request.get('owner')
@@ -271,10 +299,11 @@ app = webapp2.WSGIApplication([
 	('/setevent', SetEvent),
 	('/timeline', CreateTimeLine),
 	('/deletetl', DeleteTimeLine),
-	('/sendsms', SendSMS),
 	('/getevent', GetEvent),
 	('/geteventbytl', GetEventByTimeLine),
 	('/viewevent', ViewEvent),
 	('/deleteevent', DeleteEvent),
 	('/agree', AgreementHandler),
+	('/check', CheckList),
+	('/remind', ReminderHandler),
 ], debug=True)
