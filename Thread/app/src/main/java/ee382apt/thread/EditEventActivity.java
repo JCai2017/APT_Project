@@ -34,7 +34,7 @@ public class EditEventActivity extends AppCompatActivity implements
     String time = null;
     String location = null;
     String timeLine = null;
-
+    String number = null;
     String ptitle = null;
     String ptime = null;
     String plocation = null;
@@ -140,11 +140,13 @@ public class EditEventActivity extends AppCompatActivity implements
                 if(tl.getSelectedItem() == null){
                     return;
                 }
-
                 ptimeLine = tl.getSelectedItem().toString();
 
                 EditText loc = (EditText)findViewById(R.id.LocationEntry);
                 plocation = loc.getText().toString();
+
+                EditText num = (EditText)findViewById(R.id.Phone);
+                number = num.getText().toString();
 
                 RequestParams params = new RequestParams();
                 params.put("email", email);
@@ -156,6 +158,7 @@ public class EditEventActivity extends AppCompatActivity implements
                 params.put("ptime", ptime);
                 params.put("ptimeLine", ptimeLine);
                 params.put("plocation", plocation);
+                params.put("number", number);
                 AsyncHttpClient client = new AsyncHttpClient();
                 client.post(API_URL, params, new AsyncHttpResponseHandler() {
                     @Override
