@@ -22,6 +22,6 @@
         android:layout_below="@+id/recyclerView"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="73dp"
-        android:text="Go Back" />
+        android:text="Go Back"/>
 
 </RelativeLayout>

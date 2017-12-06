@@ -137,6 +137,10 @@ public class EditEventActivity extends AppCompatActivity implements
                 // end get date
 
                 Spinner tl = (Spinner)findViewById(R.id.TimeLine);
+                if(tl.getSelectedItem() == null){
+                    return;
+                }
+
                 ptimeLine = tl.getSelectedItem().toString();
 
                 EditText loc = (EditText)findViewById(R.id.LocationEntry);

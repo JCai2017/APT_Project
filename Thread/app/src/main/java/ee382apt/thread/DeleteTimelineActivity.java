@@ -68,6 +68,10 @@ public class DeleteTimelineActivity extends AppCompatActivity implements
 
     public void deleteTimeLine(){
         Spinner tl = (Spinner)findViewById(R.id.TimeLines);
+        if(tl.getSelectedItem() == null){
+            return;
+        }
+
         timeLine = tl.getSelectedItem().toString();
 
         RequestParams params = new RequestParams();

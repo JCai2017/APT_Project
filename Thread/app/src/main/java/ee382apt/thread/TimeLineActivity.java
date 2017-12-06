@@ -47,6 +47,8 @@ public class TimeLineActivity extends AppCompatActivity implements
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        findViewById(R.id.backButton).setOnClickListener(this);
+
         email = getIntent().getStringExtra("email");
         timeline = getIntent().getStringExtra("timeline");
 
