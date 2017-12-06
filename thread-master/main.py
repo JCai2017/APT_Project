@@ -225,6 +225,7 @@ class GetEventByTimeLine(webapp2.RequestHandler):
 		tls = TimeLine.query(user == TimeLine.ownerEmail)
 		names = []
 		times = []
+		lookup = dict()
 		t = ""
 		for tl in tls:
 			if target == tl.name:
@@ -233,8 +234,13 @@ class GetEventByTimeLine(webapp2.RequestHandler):
 
 		events = Event.query(t.key == Event.timeLine)
 		for e in events:
-			names.append(e.title)
+			#names.append(e.title)
+			lookup[e.time] = e.title
 			times.append(e.time)
+
+		times = sorted(times)
+		for t in times:
+			names.append(lookup[t])
 
 		template = {
 			'titles': names,
