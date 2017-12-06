@@ -20,7 +20,7 @@
 
     <EditText
         android:id="@+id/EventEntry"
-        android:layout_width="wrap_content"
+        android:layout_width="128dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="16dp"
@@ -120,11 +120,23 @@
         android:layout_marginBottom="7dp"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="12:00"
+        android:hint="12:00(must)"
         android:inputType="time"
         app:layout_constraintBottom_toTopOf="@+id/CancelButton"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/TimeLine"
         app:layout_constraintVertical_bias="0.4" />
+
+    <EditText
+        android:id="@+id/Phone"
+        android:layout_width="169dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="+15120001111(opt)"
+        android:inputType="phone"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
