@@ -85,7 +85,7 @@ public class PrepareTimeLineActivity extends AppCompatActivity implements
         Intent intent = new Intent(this, TimeLineActivity.class);
         intent.putExtra("email", email);
         intent.putExtra("timeline", timeline);
-        intent.putExtra(EXTRA_ORIENTATION, Orientation.HORIZONTAL);
+        intent.putExtra(EXTRA_ORIENTATION, Orientation.VERTICAL);
         intent.putExtra(EXTRA_WITH_LINE_PADDING, true);
         startActivity(intent);
     }
