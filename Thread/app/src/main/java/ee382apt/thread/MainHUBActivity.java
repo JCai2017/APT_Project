@@ -4,12 +4,12 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
-import com.google.api.client.json.*;
 import com.google.api.client.json.gson.GsonFactory;
 import com.google.api.client.util.DateTime;
 import com.google.api.services.calendar.Calendar;
@@ -17,6 +17,7 @@ import com.google.api.services.calendar.CalendarScopes;
 import com.google.api.services.calendar.model.Event;
 import com.google.api.services.calendar.model.Events;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -49,17 +50,16 @@ public class MainHUBActivity extends AppCompatActivity implements
                 GoogleAccountCredential.usingOAuth2(this, Collections.singleton(CalendarScopes.CALENDAR));
     }
 
-    public void importEvents(){
+    /*public void importEvents(){
         // Initialize Calendar service with valid OAuth credentials
         Calendar service = new Calendar.Builder(transport, jsonFactory, credential)
-                .setApplicationName("Thread").build();
+                .setApplicationName("ee382apt.thread").build();
 
         // Iterate over the events in the specified calendar
         String pageToken = null;
         do {
-            Events events;
             try {
-                events = service.events().list("primary").setPageToken(pageToken).execute();
+                Events events = service.events().list("primary").setPageToken(pageToken).execute();
                 List<Event> items = events.getItems();
                 for (Event event : items) {
                     //System.out.println(event.getSummary());
@@ -67,19 +67,23 @@ public class MainHUBActivity extends AppCompatActivity implements
                     DateTime time = event.getStart().getDateTime();
                     times.add("" + time);
                     locations.add(event.getLocation());
+                    pageToken = events.getNextPageToken();
                 }
-                pageToken = events.getNextPageToken();
-            }catch (Exception E){
+            }catch(IOException e){
 
             }
         } while (pageToken != null);
-    }
+
+        //TODO: Add events to database
+    }*/
 
     public void onClick(View view){
-        Intent intent = new Intent(this, CreateTimeLineActivity.class);
+        Intent intent;
         switch(view.getId()){
             case R.id.cTimeline:
                 intent = new Intent(this, CreateTimeLineActivity.class);
+                intent.putExtra("email", email);
+                startActivity(intent);
                 break;
             case R.id.AddEvent:
                 intent = new Intent(this, EditEventActivity.class);
@@ -87,21 +91,29 @@ public class MainHUBActivity extends AppCompatActivity implements
                 intent.putExtra("time", "");
                 intent.putExtra("location", "");
                 intent.putExtra("timeline", "");
+                intent.putExtra("email", email);
+                startActivity(intent);
                 break;
             case R.id.DeleteTimeline:
                 intent = new Intent(this, DeleteTimelineActivity.class);
+                intent.putExtra("email", email);
+                startActivity(intent);
                 break;
             case R.id.ViewTimeLine:
                 intent = new Intent(this, PrepareTimeLineActivity.class);
+                intent.putExtra("email", email);
+                startActivity(intent);
                 break;
             case R.id.ViewCalendar:
                 intent = new Intent(this, CalendarActivity.class);
+                intent.putExtra("email", email);
+                startActivity(intent);
                 break;
-            case R.id.ImportButton:
+            /*case R.id.ImportButton:
                 importEvents();
-                break;
+                //Toast.makeText(this, "Imported Events from Google Calendar", Toast.LENGTH_LONG)
+                //        .show();
+                break;*/
         }
-        intent.putExtra("email", email);
-        startActivity(intent);
     }
 }
